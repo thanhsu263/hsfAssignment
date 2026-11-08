@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" data-bs-theme="light">
+<head th:replace="~{fragments/layout :: head('Sign in')}"></head>
+<body class="login-page">
+<main class="container py-5 my-auto"><div class="row justify-content-center g-4"><div class="col-md-7 col-lg-5">
+    <div class="card shadow border-0"><div class="card-body p-4 p-md-5">
+        <div class="text-center mb-4"><i class="bi bi-boxes display-5 text-primary"></i><h1 class="h3 mt-2">Welcome back</h1><p class="text-body-secondary mb-0">Sign in to the CRUD Demo</p></div>
+        <div th:replace="~{fragments/layout :: flash}"></div>
+        <form th:action="@{/auth}" method="post" class="vstack gap-3">
+            <div><label class="form-label" for="email">Email</label><div class="input-group"><span class="input-group-text"><i class="bi bi-envelope"></i></span><input class="form-control" type="email" id="email" name="email" required autofocus placeholder="you@example.com"></div></div>
+            <div><label class="form-label" for="password">Password</label><div class="input-group"><span class="input-group-text"><i class="bi bi-lock"></i></span><input class="form-control" type="password" id="password" name="password" required placeholder="Password"></div></div>
+            <button class="btn btn-primary w-100" type="submit"><i class="bi bi-box-arrow-in-right me-1"></i>Sign in</button>
+        </form>
+    </div></div>
+</div><div class="col-md-7 col-lg-4"><div class="card shadow-sm"><div class="card-body"><h2 class="h5"><i class="bi bi-person-vcard me-1"></i>Demo accounts</h2><p class="small text-body-secondary">Passwords are intentionally simple for class use.</p><ul class="list-group list-group-flush small"><li class="list-group-item"><strong>Admin:</strong> ad@a.com / ad</li><li class="list-group-item"><strong>Staff:</strong> st@a.com / st</li><li class="list-group-item"><strong>Blocked:</strong> mb@a.com / mb</li></ul></div></div></div></div></main>
+<footer th:replace="~{fragments/layout :: footer}"></footer><th:block th:replace="~{fragments/layout :: scripts}"></th:block>
+</body></html>

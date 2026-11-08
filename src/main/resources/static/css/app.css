@@ -1,0 +1,5 @@
+body { min-height: 100vh; display: flex; flex-direction: column; }
+main { flex: 1; }
+.login-page { background: linear-gradient(135deg, var(--bs-body-bg), color-mix(in srgb, var(--bs-primary) 10%, var(--bs-body-bg))); }
+.stat-card { border-left: .3rem solid var(--bs-primary); }
+.table td, .table th { vertical-align: middle; }
