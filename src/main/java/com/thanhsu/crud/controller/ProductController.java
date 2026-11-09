@@ -27,6 +27,10 @@ public class ProductController {
     @PostMapping("/save") public String save(@Valid @ModelAttribute("product") Product product, BindingResult result,
                                                 @RequestParam(defaultValue = "false") boolean editing, Model model, RedirectAttributes redirect) {
         if (result.hasErrors()) { addFormData(model, product, editing); return "product-form"; }
+        // Resolve category from id to avoid detached entity merge issue
+        if (product.getCategory() != null && product.getCategory().getId() != null) {
+            product.setCategory(categories.findById(product.getCategory().getId()).orElse(null));
+        }
         products.save(product); redirect.addFlashAttribute("success", editing ? "Product updated successfully." : "Product created successfully."); return "redirect:/products";
     }
     @PostMapping("/delete/{id}") public String delete(@PathVariable String id, RedirectAttributes redirect) {

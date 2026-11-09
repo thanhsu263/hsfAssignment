@@ -19,8 +19,13 @@ public class ProductService {
         return repository.save(product);
     }
     private String nextId() {
-        return repository.findAll(PageRequest.of(0, 1, Sort.by(Sort.Direction.DESC, "id")))
-                .stream().findFirst().map(p -> String.format("P%03d", Integer.parseInt(p.getId().substring(1)) + 1))
+        // Find highest numeric ID by parsing all products (inefficient for large datasets, consider sequence table)
+        return repository.findAll().stream()
+                .map(Product::getId)
+                .filter(id -> id != null && id.matches("P\\d{3,}"))
+                .map(id -> Integer.parseInt(id.substring(1)))
+                .max(Integer::compareTo)
+                .map(max -> String.format("P%03d", max + 1))
                 .orElse("P001");
     }
     public void deleteById(String id) { repository.deleteById(id); }
